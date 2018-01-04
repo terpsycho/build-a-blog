@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Dis Little Blog O' Mine!</h1>
+
+    <hr />
+
+    {% if blog|length == 0 %}
+    <p>No blogs yet.</p>
+    {% else %}
+
+        <ul>
+            {% for task in tasks %}
+            <li>{{blog.name}}
+                <form method="POST" action="/dat_blog_doh" style="display:inline-block;">
+                    <input type="hidden" name="blog-id" value="{{blog.id}}" />
+                    <input type="submit" value="Blerg!" />
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+    <hr />
+
+{% endblock %}
