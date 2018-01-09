@@ -12,51 +12,51 @@ app.secret_key = 'y337kGcys&zP3B'
 class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120))
+    title= db.Column(db.String(120))
+    body = db.Column(db.String)
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, title, body):
+        self.title = title
+        self.body = body
 
-
-
-blog_posts = []
+#blog_posts = []
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
 
-    return render_template('add_a_blog.html',title="Dis Lil Blog O' Mine!", blog_posts=blog_posts)
+    return redirect('/blog')
 
-@app.route('/blog', methods=['POST'])
+@app.route('/blog', methods=['POST', 'GET'])
 def dat_blog_doh():
 
-    return render_template('blog_page.html',title="Dis Lil Blog O' Mine!", blog_posts=blog_posts)
+    return render_template('blog_page.html',title="Dis Lil Blog O' Mine!", blog_posts=Blog.query.all())
     #return redirect('/')
 
-@app.route('/newpost', methods=['POST'])
+# Need to do error messages displayed if the title or body are left blank, rerendering the form and the info submitted
+@app.route('/newpost', methods=['POST', 'GET'])
 def add_post():
 
     if request.method == 'POST':
-        blog = request.form['blog']
-        new_post = Blog(blog)
+        blog_title = request.form["blog_title"]
+        blog = request.form['new_post']
+        new_post = Blog(blog_title, blog)
         db.session.add(new_post)
         db.session.commit()
 
+    blog_posts = Blog.query.all()
+    
+    #if len(blog_title) == -1:
+        #return error
+    #elif len(new_post) == -1:
+        #return error
+    #else:
+        
 
-    return render_template('add_a_blog.html',title="Dis Lil Blog O' Mine!",  blog_posts=blog_posts)
+    return render_template('add_a_blog.html',title="Dis Lil Blog O' Mine!",  blog_posts=Blog.query.all()) #and redirect('/blog')
 
 
 if __name__ == '__main__':
     app.run()
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    app.run()
-
 
     
