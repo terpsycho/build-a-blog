@@ -6,13 +6,15 @@
         <label>
             New Blog Title:<br>
 
-            <input type="text" name='blog_title' />
+            <input type="text" name='blog_title'value='{{blog_title}}' />
         </label>
+        <span class="error">{{title_error}}</span><br>
         <br>
         <label>
             New Blog Content:<br>
-            <textarea name='new_post'rows="25" cols="50"></textarea>
+            <textarea name='new_content' value='{{new_content}}' rows="25" cols="50"></textarea>
         </label>
+        <span class="error">{{content_error}}</span><br>
         <br>
         <input type="submit" value='Blog Dem Feelz!' />
     </form>

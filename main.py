@@ -33,28 +33,58 @@ def dat_blog_doh():
     return render_template('blog_page.html',title="Dis Lil Blog O' Mine!", blog_posts=Blog.query.all())
     #return redirect('/')
 
+
+    
+
 # Need to do error messages displayed if the title or body are left blank, rerendering the form and the info submitted
 @app.route('/newpost', methods=['POST', 'GET'])
 def add_post():
-
     if request.method == 'POST':
         blog_title = request.form["blog_title"]
-        blog = request.form['new_post']
+        blog = request.form['new_content']
         new_post = Blog(blog_title, blog)
         db.session.add(new_post)
         db.session.commit()
 
-    blog_posts = Blog.query.all()
+        blog_posts = Blog.query.all()
+
+        return render_template('add_a_blog.html',title="Dis Lil Blog O' Mine!",  blog_posts=Blog.query.all())
     
-    #if len(blog_title) == -1:
-        #return error
-    #elif len(new_post) == -1:
-        #return error
-    #else:
         
+       # return redirect('/blog')
 
-    return render_template('add_a_blog.html',title="Dis Lil Blog O' Mine!",  blog_posts=Blog.query.all()) #and redirect('/blog')
+#@app.route('/newpost', methods=['POST', 'GET'])
+#def post():
 
+#@app.route('/newpost', methods=['POST', 'GET'])
+
+#def check_post():
+
+        #Empty Error Displays
+
+ #       blog_title = request.form['blog_title']
+  #      blog = request.form['new_content']
+
+   #     title_error = ''
+    #    content_error = ''
+    
+        #if len(blog_title) <= -1:
+          #  title_error= "Please provide a title for your blog."
+         #   blog_title= ''
+        #    new_content= new_content  
+
+       # if len(new_content) <= -1:
+           # content_error= "Please provide some content for your blog."
+           # blog_title= blog_title
+            #new_content= ''
+        #if not title_error and not content_error:
+            #return render_template('add_a_blog.html',title="Dis Lil Blog O' Mine!", blog_title = blog_title, 
+                #new_content= new_content, title_error= title_error, content_error=content_error)
+
+
+
+   
+        
 
 if __name__ == '__main__':
     app.run()
