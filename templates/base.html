@@ -1,18 +1,25 @@
 
-
 <!doctype html>
 <html>
     <head>
-            <style>
-                    .error { color: red; }
-                </style>
-
         <title>{{title}}</title>
-        <a href="http://www.localhost:5000/blog">My Blog</a>
-        <a href="http://www.localhost:5000/newpost">New Post</a>
     </head>
 <body>
-    
+
+    <div>
+        <a href='/blog'>All Dem Blogs</a>
+        <a href='/newpost'>Write a New Blog</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    <ul>
+    {% for category,message in messages %}
+        <li class="{{category}}">{{message}}</li>
+    {% endfor %}
+    </ul>
+    {% endwith %}
+
+
     {% block content %}
     {% endblock %}
 
