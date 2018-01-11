@@ -1,7 +1,15 @@
 
 <!doctype html>
 <html>
-    <head>
+    <head> 
+        <style>
+        .error {
+                color: red;
+            }
+        div {
+            color: red;
+        }
+        </style>
         <title>{{title}}</title>
     </head>
 <body>
@@ -12,11 +20,11 @@
     </div>
 
     {% with messages = get_flashed_messages(with_categories=True) %}
-    <ul>
+    
     {% for category,message in messages %}
-        <li class="{{category}}">{{message}}</li>
+        <div class="{{category}}">{{message}}</div>
     {% endfor %}
-    </ul>
+
     {% endwith %}
 
 
